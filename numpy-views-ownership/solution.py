@@ -1,0 +1,15 @@
+import numpy as np
+
+
+def is_view_of(candidate: np.ndarray, source: np.ndarray) -> bool:
+    return bool(np.shares_memory(candidate, source))
+
+
+def owns_its_data(arr: np.ndarray) -> bool:
+    return arr.base is None
+
+
+def find_ultimate_owner(arr: np.ndarray) -> np.ndarray:
+    while arr.base is not None:
+        arr = arr.base
+    return arr
