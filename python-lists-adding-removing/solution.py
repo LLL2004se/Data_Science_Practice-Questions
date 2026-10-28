@@ -1,0 +1,65 @@
+def append_all(lst: list, items: list) -> None:
+    lst.extend(items)
+
+
+def insert_sorted(lst: list, value) -> None:
+    i = 0
+
+    while i < len(lst) and lst[i] <= value:
+        i += 1
+
+    lst.insert(i, value)
+
+
+def flatten_one_level(list_of_lists: list) -> list:
+    result = []
+
+    for inner_list in list_of_lists:
+        result.extend(inner_list)
+
+    return result
+
+
+def concat_identity_report(lst: list, extra: list) -> list:
+    original_id = id(lst)
+    lst += extra
+    same_after_iadd = id(lst) == original_id
+
+    original_id = id(lst)
+    lst = lst + extra
+    same_after_plus = id(lst) == original_id
+
+    return [same_after_iadd, same_after_plus]
+
+
+def remove_all(lst: list, value) -> None:
+    i = 0
+
+    while i < len(lst):
+        if lst[i] == value:
+            del lst[i]
+        else:
+            i += 1
+
+
+def pop_last_n(lst: list, n: int) -> list:
+    if n <= 0:
+        return []
+
+    n = min(n, len(lst))
+    removed = lst[-n:]
+    del lst[-n:]
+
+    return removed
+
+
+def delete_every_other(lst: list) -> None:
+    del lst[::2]
+
+
+def remove_first_or_report(lst: list, value) -> bool:
+    if value in lst:
+        lst.remove(value)
+        return True
+
+    return False
